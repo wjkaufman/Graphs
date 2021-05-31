@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Directed Graph Editor</title>
+    <link rel="stylesheet" href="app.css">
+  </head>
+
+  <body>
+    <div id="svg"></div>
+
+    <div>
+      <button onclick="saveSVG();">Save SVG</button>
+      <button onclick="dumpJSON();">Dump JSON</button>
+      <button onclick="loadJSON();">Load JSON</button>
+    </div>
+
+    <div>
+      <h3>JSON Input / Output</h3>
+      <textarea id="json-inout"></textarea>
+    </div>
+
+    <h1 id="overview">Overview</h1>
+<p>A simple directed graph editor, only slightly adapted from the example at <a href="http://bl.ocks.org/rkirsling/5001347" class="uri">http://bl.ocks.org/rkirsling/5001347</a>. Saving functionality lifted from <a href="https://d3export.housegordon.org" class="uri">https://d3export.housegordon.org</a>.</p>
+<h1 id="editing-the-graph">Editing the graph</h1>
+<ul>
+<li><strong>Click</strong> in the open space to <strong>add a node</strong>: left-click for a “basic” one, right-click for an “important” one.</li>
+<li><strong>Drag</strong> from one node to another to <strong>add an edge</strong>.</li>
+<li><strong>Ctrl-drag</strong> a node to <strong>move</strong> the graph layout.</li>
+<li><strong>Shift-click</strong> a node to <strong>change its label</strong>.</li>
+<li>Click a node or an edge to <strong>select</strong> it.</li>
+</ul>
+<h2 id="operations-on-selected-nodes-edges">Operations on selected nodes / edges</h2>
+<ul>
+<li>When a node is selected: <strong>R</strong> toggles reflexivity, <strong>Delete</strong> removes the node.</li>
+<li>When an edge is selected: <strong>L</strong>(eft), <strong>R</strong>(ight), <strong>B</strong>(oth) change direction, <strong>Delete</strong> removes the edge.</li>
+</ul>
+<h1 id="save-load-functionality">Save / load functionality</h1>
+<ul>
+<li><strong>Save SVG</strong> saves the graph as an SVG format file which you can then further edit using appropriate graphics software, e.g. <a href="https://inkscape.org/">InkScape</a>.</li>
+<li><strong>Dump JSON</strong> dumps a JSON representation of the graph to the <strong>JSON Input / Output</strong> textarea. Save this into a text file if you want to resume working on your graph at some point in the future.</li>
+<li><strong>Load JSON</strong> takes the output of a previous <strong>Dump JSON</strong> operation that you’ve pasted back into the <strong>JSON Input / Output</strong> textarea and recreates the corresponding graph, so that you can continue where you’ve left off.</li>
+</ul>
+  </body>
+
+  <!-- Hidden <FORM> to submit the SVG data to the server, which will convert it
+     to SVG/PDF/PNG downloadable file. The form is populated and submitted by
+     app.js. -->
+  <form id="svgform" method="post" action="save.php">
+    <input type="hidden" id="data" name="data" value="">
+  </form>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.12/d3.min.js"></script>
+  <script src="app.js"></script>
+</html>
